@@ -4,12 +4,14 @@
 
 class LinkedList {
  private:
+    int size;
     Node *head;
     Node *tail;
  public:
     LinkedList();
     ~LinkedList();
 
+    int size();
     void insert_front(int value);
     void insert_back(int value);
     int front();

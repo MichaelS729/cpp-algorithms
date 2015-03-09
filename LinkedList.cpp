@@ -6,6 +6,7 @@
 using std::cout;
 
 LinkedList::LinkedList() {
+  size = 0;
   head = new Node();
   tail = new Node();
   head->set_next(tail);
@@ -13,6 +14,7 @@ LinkedList::LinkedList() {
 }
 
 LinkedList::~LinkedList() {
+  size = NULL;
   Node *prev = NULL;
   Node *curr = head;
   while (curr != NULL) {
@@ -23,6 +25,10 @@ LinkedList::~LinkedList() {
   delete curr;
 }
 
+int LinkedList::size() {
+  return size;
+}
+
 void LinkedList::insert_front(int value) {
   Node *new_node = new Node(value);
   Node *first_node = head->next();
@@ -30,6 +36,7 @@ void LinkedList::insert_front(int value) {
     first_node->set_prev(new_node);
   }
   head->set_next(new_node);
+  size++;
 }
 
 void LinkedList::insert_back(int value) {
@@ -39,6 +46,7 @@ void LinkedList::insert_back(int value) {
     last_node->set_prev(new_node);
   }
   tail->set_prev(new_node);
+  size++;
 }
 
 int LinkedList::front() {
@@ -67,6 +75,7 @@ int LinkedList::pop_front() {
   }
   head->set_next(front_node->next());
   front_node->next()->set_prev(head);
+  size--;
   return front_node->value();
 }
 
@@ -77,5 +86,6 @@ int LinkedList:pop_back() {
     return NULL;
   }
   tail->set_prev(back_node->prev());
+  size--;
   return back_node->value();
 }
