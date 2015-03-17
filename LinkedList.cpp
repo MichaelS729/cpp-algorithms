@@ -1,5 +1,5 @@
-#include <cstdef.h>
-#include <iostream.h>
+#include <cstdef>
+#include <iostream>
 #include "Node.h"
 #include "LinkedList.h"
 
