@@ -23,7 +23,8 @@ int* merge(int a[], int a_length, int b[], int b_length) {
     sorted[k] = b[j];
     k++;
   }
-  delete a, b;
+  delete[] a;
+  delete[] b;
   return sorted;
 }
 
@@ -51,14 +52,17 @@ int* mergesort(int arr[], int length) {
     right[j] = arr[i];
     j++;
   }
-  return merge(mergesort(left, left_length), left_length, mergesort(right, right_length), right_length);
+  int *sorted = merge(mergesort(left, left_length), left_length, mergesort(right, right_length), right_length);
+  delete[] left;
+  delete[] right;
+  return sorted;
 }
 
 int main() {
   int length1 = 10;
-  int arr1[] = {2, 3, 5, 4, 6, 7, 1, 8, 9, 10};
+  int arr1[] = {2, 3, 8, 8, 7, 7, 7, 8, 9, 10};
   int length2 = 9;
-  int arr2[] = {2, 3, 5, 4, 6, 7, 1, 8, 9};
+  int arr2[] = {2, 3, 5, 5, 6, 7, 9, 8, 9};
   int i;
   int *sorted1 = mergesort(arr1, length1);
   for (i = 0; i < length1; i++) {
@@ -70,5 +74,7 @@ int main() {
     cout << sorted2[i] << ' ';
   }
   cout << '\n';
+  delete[] sorted1;
+  delete[] sorted2;
   return 0;
 }
