@@ -23,6 +23,7 @@ int* merge(int a[], int a_length, int b[], int b_length) {
     sorted[k] = b[j];
     k++;
   }
+  delete a, b;
   return sorted;
 }
 
