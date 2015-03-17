@@ -52,7 +52,8 @@ int* mergesort(int arr[], int length) {
     right[j] = arr[i];
     j++;
   }
-  int *sorted = merge(mergesort(left, left_length), left_length, mergesort(right, right_length), right_length);
+  int *sorted = merge(mergesort(left, left_length), left_length,
+                      mergesort(right, right_length), right_length);
   delete[] left;
   delete[] right;
   return sorted;
