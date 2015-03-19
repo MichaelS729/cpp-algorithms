@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Node.h"
 
 Node::Node() {
@@ -6,16 +7,16 @@ Node::Node() {
 }
 
 Node::Node(int value) {
-  prev = NULL:
+  prev = NULL;
   next = NULL;
-  this.value = value;
+  this->value = value;
 }
 
 Node::~Node() {
 }
 
 void Node::set_value(int value) {
-  this.value = value;
+  this->value = value;
 }
 
 void Node::set_prev(Node* node) {
@@ -26,14 +27,14 @@ void Node::set_next(Node* node) {
   next = node;
 }
 
-int Node::value() {
+int Node::get_value() {
   return value;
 }
 
-Node* Node::prev() {
+Node* Node::get_prev() {
   return prev;
 }
 
-Node* Node::next() {
+Node* Node::get_next() {
   return next;
 }

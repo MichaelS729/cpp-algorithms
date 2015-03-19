@@ -1,14 +1,11 @@
-main: main.o LinkedList.o Node.o
-	g++ -o main main.o LinkedList.o Node.o
+BinarySearch:
+	g++ BinarySearch.cpp -o BinarySearch
 
-main.o: main.cpp LinkedList.h Node.h LinkedListTests.h
-	g++ -Wall -c main.cpp
+MergeSort:
+	g++ MergeSort.cpp -o MergeSort
 
-Node.o: Node.cpp Node.h
-	g++ -Wall -c Node.cpp
-
-LinkedList.o: LinkedList.cpp LinkedList.h Node.h
-	g++ -Wall -c LinkedList.cpp
+LinkedList: LinkedList.h Node.h
+	g++ LinkedList.cpp Node.cpp -o LinkedList
 
 clean:
-	rm -f main.o LinkedList.o Node.o main
+	rm -f BinarySearch MergeSort LinkedList

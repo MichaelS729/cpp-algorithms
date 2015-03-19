@@ -16,9 +16,9 @@ class Node {
     void set_prev(Node *node);
     void set_next(Node *node);
 
-    int value();
-    Node *prev();
-    Node *next();
+    int get_value();
+    Node *get_prev();
+    Node *get_next();
 };
 
 #endif  // NODE_H_
