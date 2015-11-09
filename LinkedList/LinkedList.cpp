@@ -8,8 +8,8 @@ LinkedList::LinkedList() {
   size = 0;
   head = new Node();
   tail = new Node();
-  head->set_next(tail);
-  tail->set_prev(head);
+  head->next = tail;
+  tail->prev = head;
 }
 
 LinkedList::~LinkedList() {
@@ -18,7 +18,7 @@ LinkedList::~LinkedList() {
   Node *curr = head;
   while (curr != NULL) {
     prev = curr;
-    curr = curr->get_next();
+    curr = curr->next;
     delete prev;
   }
   delete curr;
@@ -30,88 +30,90 @@ int LinkedList::get_size() {
 
 int LinkedList::index_of(int val) {
   int index = 0;
-  Node *curr = head->get_next();
+  Node *curr = head->next;
   while (curr != tail) {
-    if (curr->get_value() == val) {
+    if (curr->value == val) {
       return index;
     }
-    curr = curr->get_next();
+    curr = curr->next;
     index++;
   }
   return index;
 }
 
 void LinkedList::insert_front(int value) {
-  Node *first_node = head->get_next();
-  Node *new_node = new Node(value);
-  new_node->set_prev(head);
-  new_node->set_next(first_node);
-  first_node->set_prev(new_node);
-  head->set_next(new_node);
+  Node *first_node = head->next;
+  Node *new_node = new Node();
+  new_node->value = value;
+  new_node->prev = head;
+  new_node->next = first_node;
+  first_node->prev = new_node;
+  head->next = new_node;
   size++;
 }
 
 void LinkedList::insert_back(int value) {
-  Node *last_node = tail->get_prev();
-  Node *new_node = new Node(value);
-  new_node->set_next(tail);
-  new_node->set_prev(last_node);
-  last_node->set_next(new_node);
-  tail->set_prev(new_node);
+  Node *last_node = tail->prev;
+  Node *new_node = new Node();
+  new_node->value = value;
+  new_node->next = tail;
+  new_node->prev = last_node;
+  last_node->next = new_node;
+  tail->prev = new_node;
   size++;
 }
 
 int LinkedList::front() {
-  Node *front_node = head->get_next();
+  Node *front_node = head->next;
   if (front_node == tail) {
     cout << "Error: List is empty\n";
-    return NULL;
+    return -1;
   }
-  return front_node->get_value();
+  return front_node->value;
 }
 
 int LinkedList::back() {
-  Node *back_node = tail->get_prev();
+  Node *back_node = tail->prev;
   if (back_node == head) {
     cout << "Error: List is empty\n";
-    return NULL;
+    return -1;
   }
-  return back_node->get_value();
+  return back_node->value;
 }
 
 int LinkedList::pop_front() {
-  Node *front_node = head->get_next();
+  Node *front_node = head->next;
   if (front_node == tail) {
     cout << "Error: List is empty\n";
-    return NULL;
+    return -1;
   }
-  head->set_next(front_node->get_next());
-  front_node->get_next()->set_prev(head);
+  head->next = front_node->next;
+  front_node->next->prev = head;
   size--;
-  int val = front_node->get_value();
+  int val = front_node->value;
   delete front_node;
   return val;
 }
 
 int LinkedList::pop_back() {
-  Node *back_node = tail->get_prev();
+  Node *back_node = tail->prev;
   if (back_node == head) {
     cout << "Error: List is empty\n";
-    return NULL;
+    return -1;
   }
-  tail->set_prev(back_node->get_prev());
-  back_node->get_prev()->set_next(tail);
+  tail->prev = back_node->prev;
+  back_node->prev->next = tail;
   size--;
-  int val = back_node->get_value();
+  int val = back_node->value;
   delete back_node;
   return val;
 }
 
 void LinkedList::print_elements_front_to_back() {
-  Node *curr = head->get_next();
+  Node *curr = head->next;
   while (curr != tail) {
-    cout << curr->get_value() << ' ';
-    curr = curr->get_next();
+    cout << curr->value << ' ';
+    curr = curr->next;
   }
   cout << '\n';
 }
