@@ -4,18 +4,20 @@
 
 using std::cout;
 
-LinkedList::LinkedList() {
+template<class T>
+LinkedList<T>::LinkedList() {
   size = 0;
-  head = new Node();
-  tail = new Node();
+  head = new Node<T>();
+  tail = new Node<T>();
   head->next = tail;
   tail->prev = head;
 }
 
-LinkedList::~LinkedList() {
+template<class T>
+LinkedList<T>::~LinkedList() {
   size = 0;
-  Node *prev = NULL;
-  Node *curr = head;
+  Node<T> *prev = NULL;
+  Node<T> *curr = head;
   while (curr != NULL) {
     prev = curr;
     curr = curr->next;
@@ -24,13 +26,15 @@ LinkedList::~LinkedList() {
   delete curr;
 }
 
-int LinkedList::get_size() {
+template<class T>
+int LinkedList<T>::get_size() {
   return size;
 }
 
-int LinkedList::index_of(int val) {
+template<class T>
+int LinkedList<T>::index_of(T val) {
   int index = 0;
-  Node *curr = head->next;
+  Node<T> *curr = head->next;
   while (curr != tail) {
     if (curr->value == val) {
       return index;
@@ -41,9 +45,10 @@ int LinkedList::index_of(int val) {
   return index;
 }
 
-void LinkedList::insert_front(int value) {
-  Node *first_node = head->next;
-  Node *new_node = new Node();
+template<class T>
+void LinkedList<T>::insert_front(T value) {
+  Node<T> *first_node = head->next;
+  Node<T> *new_node = new Node<T>();
   new_node->value = value;
   new_node->prev = head;
   new_node->next = first_node;
@@ -52,9 +57,10 @@ void LinkedList::insert_front(int value) {
   size++;
 }
 
-void LinkedList::insert_back(int value) {
-  Node *last_node = tail->prev;
-  Node *new_node = new Node();
+template<class T>
+void LinkedList<T>::insert_back(T value) {
+  Node<T> *last_node = tail->prev;
+  Node<T> *new_node = new Node<T>();
   new_node->value = value;
   new_node->next = tail;
   new_node->prev = last_node;
@@ -63,8 +69,9 @@ void LinkedList::insert_back(int value) {
   size++;
 }
 
-int LinkedList::front() {
-  Node *front_node = head->next;
+template<class T>
+T LinkedList<T>::front() {
+  Node<T> *front_node = head->next;
   if (front_node == tail) {
     cout << "Error: List is empty\n";
     return -1;
@@ -72,8 +79,9 @@ int LinkedList::front() {
   return front_node->value;
 }
 
-int LinkedList::back() {
-  Node *back_node = tail->prev;
+template<class T>
+T LinkedList<T>::back() {
+  Node<T> *back_node = tail->prev;
   if (back_node == head) {
     cout << "Error: List is empty\n";
     return -1;
@@ -81,8 +89,9 @@ int LinkedList::back() {
   return back_node->value;
 }
 
-int LinkedList::pop_front() {
-  Node *front_node = head->next;
+template<class T>
+T LinkedList<T>::pop_front() {
+  Node<T> *front_node = head->next;
   if (front_node == tail) {
     cout << "Error: List is empty\n";
     return -1;
@@ -90,13 +99,14 @@ int LinkedList::pop_front() {
   head->next = front_node->next;
   front_node->next->prev = head;
   size--;
-  int val = front_node->value;
+  T val = front_node->value;
   delete front_node;
   return val;
 }
 
-int LinkedList::pop_back() {
-  Node *back_node = tail->prev;
+template<class T>
+T LinkedList<T>::pop_back() {
+  Node<T> *back_node = tail->prev;
   if (back_node == head) {
     cout << "Error: List is empty\n";
     return -1;
@@ -104,13 +114,14 @@ int LinkedList::pop_back() {
   tail->prev = back_node->prev;
   back_node->prev->next = tail;
   size--;
-  int val = back_node->value;
+  T val = back_node->value;
   delete back_node;
   return val;
 }
 
-void LinkedList::print_elements_front_to_back() {
-  Node *curr = head->next;
+template<class T>
+void LinkedList<T>::print_elements_front_to_back() {
+  Node<T> *curr = head->next;
   while (curr != tail) {
     cout << curr->value << ' ';
     curr = curr->next;
@@ -119,7 +130,7 @@ void LinkedList::print_elements_front_to_back() {
 }
 
 int main() {
-  LinkedList *l = new LinkedList();
+  LinkedList<int> *l = new LinkedList<int>();
   l->insert_front(1);
   l->insert_front(2);
   l->insert_back(3);
@@ -156,7 +167,7 @@ int main() {
 
   cout << "TESTING DESTRUCTOR:\n";
   delete l;
-  LinkedList* l2 = new LinkedList();
+  LinkedList<int> *l2 = new LinkedList<int>();
   l2->insert_front(1);
   l2->insert_front(2);
   l2->insert_back(3);
