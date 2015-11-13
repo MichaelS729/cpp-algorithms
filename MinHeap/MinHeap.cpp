@@ -11,6 +11,18 @@ MinHeap::MinHeap(int initial_capacity) {
   curr_index = -1;
 }
 
+MinHeap::MinHeap(int* arr, int length) {
+  capacity = length;
+  heap = new int[length];
+  curr_index = length - 1;
+  for (int i = 0; i < length; i++) {
+    heap[i] = arr[i];
+  }
+  for (int i = curr_index; i >= 0; i--) {
+    bubble_down(heap[i], i);
+  }
+}
+
 MinHeap::~MinHeap() {
   delete[] heap;
 }
@@ -159,6 +171,20 @@ int main() {
   cout << mh->remove_min() << "\n";
 
   cout << "size() should be 0: " << mh->size() << "\n";
-
+  cout << "\n";
   delete mh;
+
+  int length = 7;
+  int* arr = new int[length];
+  arr[0] = 3;
+  arr[1] = 7;
+  arr[2] = -1;
+  arr[3] = 9;
+  arr[4] = 8;
+  arr[5] = 1;
+  arr[6] = 8;
+  mh = new MinHeap(arr, length);
+  mh->print_heap();
+  delete mh;
+  delete[] arr;
 }

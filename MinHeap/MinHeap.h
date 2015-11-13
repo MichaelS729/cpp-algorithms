@@ -13,6 +13,7 @@ class MinHeap {
 
   public:
     MinHeap(int initial_capacity=5);
+    MinHeap(int* arr, int length);
     ~MinHeap();
     int size();
 
