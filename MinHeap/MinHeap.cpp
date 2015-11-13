@@ -17,17 +17,23 @@ MinHeap::MinHeap(int initial_capacity) {
   curr_index = -1;
 }
 
+MinHeap::~MinHeap() {
+  delete[] heap;
+}
+
 int MinHeap::size() {
   return curr_index + 1;
 }
 
 void MinHeap::resize() {
   int new_capacity = capacity * 2;
-  int* new_heap = new int[capacity];
+  int* new_heap = new int[new_capacity];
   for (int i = 0; i < capacity; i++) {
     new_heap[i] = heap[i];
   }
   delete[] heap;
+
+  capacity = new_capacity;
   heap = new_heap;
 }
 
@@ -61,8 +67,8 @@ void MinHeap::bubble_up(int i) {
 
 int MinHeap::remove_min() {
   int mn = min();
-  swap(heap, 0, curr_index);
   if (curr_index >= 0) {
+    swap(heap, 0, curr_index);
     curr_index--;
     bubble_down(0);
   }
@@ -161,4 +167,6 @@ int main() {
   cout << mh->remove_min() << "\n";
 
   cout << "size() should be 0: " << mh->size() << "\n";
+
+  delete mh;
 }
