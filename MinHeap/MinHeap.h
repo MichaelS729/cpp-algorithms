@@ -12,7 +12,7 @@ class MinHeap {
     void resize();
 
   public:
-    MinHeap(int initial_capacity=10);
+    MinHeap(int initial_capacity=5);
     ~MinHeap();
     int size();
 
