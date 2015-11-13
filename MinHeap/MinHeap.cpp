@@ -5,12 +5,6 @@
 
 using std::cout;
 
-void swap(int* arr, int index1, int index2) {
-  int tmp = arr[index1];
-  arr[index1] = arr[index2];
-  arr[index2] = tmp;
-}
-
 MinHeap::MinHeap(int initial_capacity) {
   capacity = initial_capacity;
   heap = new int[initial_capacity];
@@ -51,31 +45,28 @@ void MinHeap::insert(int val) {
   if (curr_index == capacity) {
     resize();
   }
-
-  heap[curr_index] = val;
-  bubble_up(curr_index);
+  bubble_up(val, curr_index);
 }
 
-void MinHeap::bubble_up(int i) {
+void MinHeap::bubble_up(int val, int i) {
   int parent = (i - 1) / 2;
-  while (i > 0 && heap[i] < heap[parent]) {
-    swap(heap, i, parent);
+  while (i > 0 && val < heap[parent]) {
+    heap[i] = heap[parent];
     i = parent;
     parent = (parent - 1) / 2;
   }
+  heap[i] = val;
 }
 
 int MinHeap::remove_min() {
   int mn = min();
   if (curr_index >= 0) {
-    swap(heap, 0, curr_index);
-    curr_index--;
-    bubble_down(0);
+    bubble_down(heap[curr_index--], 0);
   }
   return mn;
 }
 
-void MinHeap::bubble_down(int i) {
+void MinHeap::bubble_down(int val, int i) {
   int left = 2 * i + 1;
   int right = 2 * i + 2;
 
@@ -86,8 +77,8 @@ void MinHeap::bubble_down(int i) {
     next = right;
   }
 
-  while (next <= curr_index && heap[i] > heap[next]) {
-    swap(heap, i, next);
+  while (next <= curr_index && val > heap[next]) {
+    heap[i] = heap[next];
 
     i = next;
     left = 2 * i + 1;
@@ -98,6 +89,7 @@ void MinHeap::bubble_down(int i) {
       next = right;
     }
   }
+  heap[i] = val;
 }
 
 void MinHeap::print_heap() {

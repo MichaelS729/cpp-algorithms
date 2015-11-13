@@ -7,8 +7,8 @@ class MinHeap {
     int capacity;
     int curr_index;
     int* heap;
-    void bubble_up(int i);
-    void bubble_down(int i);
+    void bubble_up(int val, int i);
+    void bubble_down(int val, int i);
     void resize();
 
   public:
