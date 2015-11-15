@@ -43,6 +43,10 @@ int main() {
   int arr1[] = {2, 3, 8, 8, 7, 7, 7, 8, 9, 10};
   int length2 = 9;
   int arr2[] = {2, 3, 5, 5, 6, 7, 9, 8, 9};
+  int length3 = 1;
+  int arr3[] = {2};
+  int lengthEmpty = 0;
+  int empty[0];
 
   int i;
   mergesort(arr1, length1);
@@ -54,6 +58,18 @@ int main() {
   mergesort(arr2, length2);
   for (i = 0; i < length2; i++) {
     cout << arr2[i] << ' ';
+  }
+  cout << '\n';
+
+  mergesort(arr3, length3);
+  for (i = 0; i < length3; i++) {
+    cout << arr3[i] << ' ';
+  }
+  cout << '\n';
+
+  mergesort(empty, lengthEmpty);
+  for (i = 0; i < lengthEmpty; i++) {
+    cout << empty[i] << ' ';
   }
   cout << '\n';
 
